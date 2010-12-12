@@ -10,12 +10,7 @@ module IrcBot
         c.channels = ["#realpractice"]
       end
 
-      # on :message, "hello" do |m|
-      #   m.reply "Hello, #{m.user.nick}"
-      # end
       on :message, /.+/ do |m|
-        # puts "MESSAGE: #{m.message}"
-        # m.reply "Echo, #{m.message}"
         Message.create!(:body => m.message, :author => m.user.nick)
       end
 
