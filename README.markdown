@@ -21,4 +21,13 @@ would be. In development it is as simple as the following:
 
     rails server
 
+Oh, and don't forget you need to migrate the database as usual with the follow
+command.
 
+    rake db:migrate
+
+## Runtime Dependencies ##
+
+* rails-3.0.3
+* sqlite3-ruby
+* cinch
