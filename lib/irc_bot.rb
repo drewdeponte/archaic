@@ -5,9 +5,9 @@ module IrcBot
   def self.run
     bot = Cinch::Bot.new do
       configure do |c|
-        c.nick = "dev_arch_bot"
-        c.server = "irc.freenode.net"
-        c.channels = ["#realpractice"]
+        c.nick = Archaic::CONFIG.irc_nick
+        c.server = Archaic::CONFIG.irc_server
+        c.channels = Archaic::CONFIG.irc_channels
       end
 
       on :message, /.+/ do |m|
