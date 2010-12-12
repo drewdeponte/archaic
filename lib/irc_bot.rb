@@ -5,6 +5,7 @@ module IrcBot
   def self.run
     bot = Cinch::Bot.new do
       configure do |c|
+        c.nick = "dev_arch_bot"
         c.server = "irc.freenode.net"
         c.channels = ["#realpractice"]
       end
@@ -15,7 +16,7 @@ module IrcBot
       on :message, /.+/ do |m|
         # puts "MESSAGE: #{m.message}"
         # m.reply "Echo, #{m.message}"
-        Message.create!(:body => m.message)
+        Message.create!(:body => m.message, :author => m.user.nick)
       end
 
       on :message, "weeknum" do |m|
