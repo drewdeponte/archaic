@@ -1,5 +1,7 @@
 IrcArch::Application.routes.draw do
   resources :messages
+  match 'search' => 'search#search'
+  match '/' => 'search#search'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
