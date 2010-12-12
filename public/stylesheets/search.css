@@ -1,0 +1,18 @@
+.message {
+  border: solid 1px #999;
+  margin: 4px;
+  padding: 2px;
+  padding-left: 3px;
+}
+
+.message_body {
+  color: #333;
+}
+
+.message_author {
+  color: #aa2241;
+}
+
+.search_term {
+  color: #ff9900;
+}

@@ -14,7 +14,7 @@
 
 <% @search_res.each do |m| %>
   <div class="message">
-    <span class="message_author"><%= raw(mark_terms(m.author, @search_terms)) %></span>
+    <span class="message_author"><%= raw(mark_terms(m.author, @search_terms)) %>:</span>
     <span class="message_body"><%= raw(mark_terms(m.body, @search_terms)) %></span>
   </div>
 <% end %>
