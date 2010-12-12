@@ -12,10 +12,11 @@ module IrcBot
       # on :message, "hello" do |m|
       #   m.reply "Hello, #{m.user.nick}"
       # end
-      # on :message, /.+/ do |m|
-      #   puts "MESSAGE: #{m.message}"
-      #   m.reply "Echo, #{m.message}"
-      # end
+      on :message, /.+/ do |m|
+        # puts "MESSAGE: #{m.message}"
+        # m.reply "Echo, #{m.message}"
+        Message.create!(:body => m.message)
+      end
 
       on :message, "weeknum" do |m|
         d = Date.today
