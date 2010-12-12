@@ -4,17 +4,19 @@
   <div><%= submit_tag 'Search' %></div>
 <% end -%>
 
-<% if @search_res.empty? %>
-  <h2>No matches found</h2>
-<% elsif @search_res.size == 1 %>
-  <h2><%= @search_res.size %> match found</h2>
-<% elsif @search_res.size > 1 %>
-  <h2><%= @search_res.size %> matches found</h2>
-<% end %>
+<% if @performed_search %>
+  <% if @search_res.empty? %>
+    <h2>No matches found for <%= @search_terms.join(", ") %></h2>
+  <% elsif @search_res.size == 1 %>
+    <h2><%= @search_res.size %> match found for <%= @search_terms.join(", ") %></h2>
+  <% elsif @search_res.size > 1 %>
+    <h2><%= @search_res.size %> matches found for <%= @search_terms.join(", ") %></h2>
+  <% end %>
 
-<% @search_res.each do |m| %>
-  <div class="message">
-    <span class="message_author"><%= raw(mark_terms(m.author, @search_terms)) %>:</span>
-    <span class="message_body"><%= raw(mark_terms(m.body, @search_terms)) %></span>
-  </div>
+  <% @search_res.each do |m| %>
+    <div class="message">
+      <span class="message_author"><%= raw(mark_terms(m.author, @search_terms)) %>:</span>
+      <span class="message_body"><%= raw(mark_terms(m.body, @search_terms)) %></span>
+    </div>
+  <% end %>
 <% end %>
