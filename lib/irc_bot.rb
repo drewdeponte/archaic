@@ -13,6 +13,14 @@ module IrcBot
       on :message, /.+/ do |m|
         Message.create!(:body => m.message, :author => m.user.nick)
       end
+      
+      on :message, /.*#(\d+).*/ do |m, ticket_num|
+        tick_url_template = Archaic::CONFIG.ticket_url
+        if tick_url_template
+          tick_url = tick_url_template.gsub(/:ticket_id/, "#{ticket_num}")
+          m.reply "#{tick_url}"
+        end
+      end
 
       on :message, "weeknum" do |m|
         d = Date.today
