@@ -3,8 +3,8 @@
 <head>
   <title>IrcArch</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+  <%= yield :javascripts %>
 </head>
 <body>
 

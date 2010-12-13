@@ -1,8 +1,11 @@
-.message {
-  border: solid 1px #999;
+.match_container {
+  border: solid 1px #999;  
   margin: 4px;
   padding: 2px;
   padding-left: 3px;
+}
+
+.message {
 }
 
 .message_body {
@@ -15,4 +18,22 @@
 
 .search_term {
   color: #ff9900;
+}
+
+.message_upper_context {
+  background-color: #EEEEEE;
+  display: none;
+}
+
+.message_lower_context {
+  background-color: #EEEEEE;
+  display: none;
+}
+
+.message_upper_context .message {
+  border: none;
+}
+
+.message_lower_context .message {
+  border: none;
 }

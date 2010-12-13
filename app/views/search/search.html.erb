@@ -1,3 +1,18 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag("jquery-1.4.4.min") %>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+      $(".match_container").toggle(function() {
+        $(this).find('.message_upper_context').show();
+        $(this).find('.message_lower_context').show();
+      }, function() {
+        $(this).find('.message_upper_context').hide();
+        $(this).find('.message_lower_context').hide();
+      });
+    });
+  </script>
+<% end %>
+
 <h1>Search</h1>
 <%= form_tag('/search') do -%>
   <div><%= text_field_tag 'search_terms', nil, :size => 75 %></div>
@@ -14,9 +29,27 @@
   <% end %>
 
   <% @search_res.each do |m| %>
-    <div class="message">
-      <span class="message_author"><%= raw(mark_terms(m.author, @search_terms)) %>:</span>
-      <span class="message_body"><%= raw(mark_terms(m.body, @search_terms)) %></span>
+    <div class="match_container">
+      <div class="message_upper_context">
+        <% Message.upper_context(m).each do |cm| %>
+          <div class="message">
+            <span class="message_author"><%= raw(cm.author) %>:</span>
+            <span class="message_body"><%= raw(cm.body) %></span>
+          </div>
+        <% end %>
+      </div>
+      <div class="message">
+        <span class="message_author"><%= raw(mark_terms(m.author, @search_terms)) %>:</span>
+        <span class="message_body"><%= raw(mark_terms(m.body, @search_terms)) %></span>
+      </div>
+      <div class="message_lower_context">
+        <% Message.lower_context(m).each do |cm| %>
+          <div class="message">
+            <span class="message_author"><%= raw(cm.author) %>:</span>
+            <span class="message_body"><%= raw(cm.body) %></span>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
 <% end %>
