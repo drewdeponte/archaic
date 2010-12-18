@@ -60,9 +60,11 @@ module IrcBot
         m.reply "#{m.user.nick}: Quote grab was successful."
       end
       
-      on :message, /quotegrab list/ do |m|
+      on :message, /quotegrab list (.+)?/ do |m, user|
         mygrabs = Grab.where(:grabber_nick => m.user.nick).all
         (m.reply "#{m.user.nick}: You have no quotes." and return) unless mygrabs.any?
+        mygrabs = mygrabs.select{|g| g.grabbed_nick == user} if user
+        (m.reply "#{m.user.nick}: You have no quotes for #{user}." and return) unless mygrabs.any?
         mygrabs.each_with_index do|g, idx|
           m.reply "#{m.user.nick}: [#{idx}] #{g.message.body}"
         end
