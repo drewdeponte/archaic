@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101212053643) do
+ActiveRecord::Schema.define(:version => 20101218062244) do
+
+  create_table "grabs", :force => true do |t|
+    t.string   "grabber_nick"
+    t.string   "grabbed_nick"
+    t.integer  "message_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "messages", :force => true do |t|
     t.text     "body"

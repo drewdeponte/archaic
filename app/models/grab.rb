@@ -1,4 +1,4 @@
 class Grab < ActiveRecord::Base
-  has_one :message
+  belongs_to :message
 
 end
