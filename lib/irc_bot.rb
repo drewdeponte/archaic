@@ -85,8 +85,9 @@ module IrcBot
         m.reply "#{m.user.nick} #{fetched.message.body}"
       end
       
-      on :message, /quotegrab delete (\d+)/ do |m, idx|
+      on :message, /quotegrab delete (\d+) (.+)?/ do |m, idx, user|
         mygrabs = Grab.where(:grabber_nick => m.user.nick).all
+        mygrabs = mygrabs.select{|g| g.grabbed_nick == user} if user
         (m.reply "#{m.user.nick}: Quote was deleted.") if mygrabs[idx].destroy!
       end
       
