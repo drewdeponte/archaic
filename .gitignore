@@ -4,3 +4,4 @@ log/*.log
 log/*.pid
 log/*.output
 tmp/**/*
+config/ArchaicConfig.rb
