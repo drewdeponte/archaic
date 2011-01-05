@@ -31,8 +31,10 @@ GEM
     arel (2.0.6)
     builder (2.1.2)
     cinch (1.0.2)
+    daemons (1.1.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    god (0.11.0)
     i18n (0.5.0)
     mail (2.2.14)
       activesupport (>= 2.3.6)
@@ -71,5 +73,7 @@ PLATFORMS
 
 DEPENDENCIES
   cinch
+  daemons
+  god
   rails (= 3.0.3)
   sqlite3-ruby

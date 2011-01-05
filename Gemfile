@@ -30,4 +30,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 #   gem 'webrat'
 # end
 
+gem 'daemons'
+gem 'god'
 gem 'cinch'

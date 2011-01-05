@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'daemons'
+
+environment = "development"
+rails_script = File.expand_path('../rails', __FILE__)
+irc_bot_script = File.expand_path('../../lib/irc_bot.rb', __FILE__)
+
+options = {
+  :dir_mode   => :normal,
+  :dir        => File.expand_path('../../log', __FILE__),
+  :log_output => true,
+  :multiple   => false,
+  :backtrace  => true,
+  :monitor    => false
+}
+
+Daemons.run_proc("archaic_ircbot_service", options) do
+ exec("#{rails_script} runner -e #{environment} #{irc_bot_script}")
+end
+
+
