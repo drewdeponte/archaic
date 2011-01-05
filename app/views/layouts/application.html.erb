@@ -15,14 +15,14 @@
         <span style="font-size: 10px; color: #999;">Archiving history in the most useful of ways</span>
       </div>
       <div style="float: right; margin-top: 40px;">
-        <%= link_to 'Messages', messages_path %>
-        <%= form_tag(search_path, :style => "margin-top: 5px;") do -%>
+        <%= form_tag(search_path) do -%>
           <div style="float: right;">
             <%= text_field_tag 'search_terms', nil, :size => 30 %>
             <%= submit_tag 'Search' %>
           </div>
           <div style="clear: both;"></div>
         <% end -%>
+        <%= link_to 'Messages', messages_path, :style => "margin-top: 5px;" %>
       </div>
       <div style="clear: both;"></div>
     </div>
