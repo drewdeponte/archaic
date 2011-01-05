@@ -5,28 +5,17 @@
   padding-left: 3px;
 }
 
-.message {
-}
-
-.message_body {
-  color: #333;
-}
-
-.message_author {
-  color: #aa2241;
-}
-
 .search_term {
-  color: #ff9900;
+  color: #aa2211;
 }
 
 .message_upper_context {
-  background-color: #EEEEEE;
+  background-color: #cdcdcd;
   display: none;
 }
 
 .message_lower_context {
-  background-color: #EEEEEE;
+  background-color: #cdcdcd;
   display: none;
 }
 

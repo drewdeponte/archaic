@@ -13,12 +13,6 @@
   </script>
 <% end %>
 
-<h1>Search</h1>
-<%= form_tag('/search') do -%>
-  <div><%= text_field_tag 'search_terms', nil, :size => 75 %></div>
-  <div><%= submit_tag 'Search' %></div>
-<% end -%>
-
 <% if @performed_search %>
   <% if @search_res.empty? %>
     <h2>No matches found for <%= @search_terms.join(", ") %></h2>
@@ -32,22 +26,13 @@
     <div class="match_container">
       <div class="message_upper_context">
         <% Message.upper_context(m).each do |cm| %>
-          <div class="message">
-            <span class="message_author"><%= raw(cm.author) %>:</span>
-            <span class="message_body"><%= raw(cm.body) %></span>
-          </div>
+          <%= render :partial => "shared/custom_message", :locals => { :author => raw(cm.author), :body => raw(cm.body), :created_at => cm.created_at } %>
         <% end %>
       </div>
-      <div class="message">
-        <span class="message_author"><%= raw(mark_terms(m.author, @search_terms)) %>:</span>
-        <span class="message_body"><%= raw(mark_terms(m.body, @search_terms)) %></span>
-      </div>
+      <%= render :partial => "shared/custom_message", :locals => { :author => raw(mark_terms(m.author, @search_terms)), :body => raw(mark_terms(m.body, @search_terms)), :created_at => m.created_at } %>
       <div class="message_lower_context">
         <% Message.lower_context(m).each do |cm| %>
-          <div class="message">
-            <span class="message_author"><%= raw(cm.author) %>:</span>
-            <span class="message_body"><%= raw(cm.body) %></span>
-          </div>
+          <%= render :partial => "shared/custom_message", :locals => { :author => raw(cm.author), :body => raw(cm.body), :created_at => cm.created_at } %>
         <% end %>
       </div>
     </div>

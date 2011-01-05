@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.xml
   def index
-    @messages = Message.all
+    @messages = Message.order("created_at desc")
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,0 +1,19 @@
+.message {
+  margin: 3px;
+}
+
+.message_body {
+  color: #666;
+  display: inline;
+}
+
+.message_author {
+  color: #ff9940;
+  display: inline;
+}
+
+.message_created_at {
+  color: #999;
+  font-size: 9px;
+  float: right;
+}
