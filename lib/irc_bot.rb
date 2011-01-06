@@ -57,7 +57,7 @@ module IrcBot
           g.grabbed_nick = user
           g.message_id   = grabbed.id
         end
-        m.reply "#{m.user.nick}: Quote grab was successful."
+        m.reply "#{m.user.nick}: Forcegrab!!!."
       end
       
       on :message, /quotegrab list (.+)?/ do |m, user|
