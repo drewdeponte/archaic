@@ -52,7 +52,7 @@ module IrcBot
       on :message, /quotegrab grab (.+)/ do |m, user|
         grabbed = Message.where(:author => user).last
         (m.reply "#{m.user.nick}: No messages for #{user}" and return) unless grabbed
-        Grab.create! do |g|
+        Quote.create! do |g|
           g.grabber_nick = m.user.nick
           g.grabbed_nick = user
           g.message_id   = grabbed.id
@@ -61,7 +61,7 @@ module IrcBot
       end
       
       on :message, /quotegrab list (.+)?/ do |m, user|
-        mygrabs = Grab.where(:grabber_nick => m.user.nick).all
+        mygrabs = Quote.where(:grabber_nick => m.user.nick).all
         (m.reply "#{m.user.nick}: You have no quotes." and return) unless mygrabs.any?
         mygrabs = mygrabs.select{|g| g.grabbed_nick == user} if user
         (m.reply "#{m.user.nick}: You have no quotes for #{user}." and return) unless mygrabs.any?
@@ -71,7 +71,7 @@ module IrcBot
       end
       
       on :message, /quotegrab fetch (.+) (.+)/ do |m, user, idx|
-        theirgrabs = Grab.where(["grabbed_nick = ?", user]).all
+        theirgrabs = Quote.where(["grabbed_nick = ?", user]).all
         (m.reply "#{m.user.nick}: No quotes found for #{user}." and return) unless theirgrabs.any?
         fetched    = nil
         if idx =~ /random/i
@@ -86,7 +86,7 @@ module IrcBot
       end
       
       on :message, /quotegrab delete (\d+) (.+)?/ do |m, idx, user|
-        mygrabs = Grab.where(:grabber_nick => m.user.nick).all
+        mygrabs = Quote.where(:grabber_nick => m.user.nick).all
         mygrabs = mygrabs.select{|g| g.grabbed_nick == user} if user
         (m.reply "#{m.user.nick}: Quote was deleted.") if mygrabs[idx].destroy!
       end
