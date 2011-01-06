@@ -87,3 +87,27 @@ would be. In development it is as simple as the following:
 * cinch
 * daemons
 * god
+
+## Included Bot Plugins ##
+
+### TBC ###
+
+Simply send 'tbc' to the chat to have Archaic return a list of brews currently offered by The TBC.
+
+### Quote Grabber ###
+
+The Quote grabber allows you to 'grab' the last thing said by a particular user and store it to a 
+personal list of quotes.  Once you've grabbed a quote, you can retrieve that quote at any time.
+Commands related to the use of Quote Grabber are below:
+
+quotegrab grab *nick*
+Grab the last statement made by *nick*
+
+quotegrab list *[nick]*
+Without passing a nick, this will provide a list of all grabs performed by the user. Given a nick, it'll limit the list to only those grabs performed on nick
+
+qoutegrab fetch *user index*
+Fetches the quote by user at index index is either an integer, (obtainable by calling quotegrab list nick), or the word 'random', which will select a random quote by that user.
+
+quotegrab delete *index [user]*
+Deletes the quote at index either from that user's 'universal' list, or, if the optional user argument is provided, from the list of quotes made by the referenced user.
