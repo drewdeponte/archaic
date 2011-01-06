@@ -11,7 +11,7 @@ module IrcBot
       end
 
       on :message, /.+/ do |m|
-        Message.create!(:body => m.message, :author => m.user.nick)
+        Message.create(:body => m.message, :author => m.user.nick)
       end
       
       on :message, /.*#(\d+).*/ do |m, ticket_num|
@@ -47,6 +47,48 @@ module IrcBot
 					m.reply b
 				end
 				
+      end
+      
+      on :message, /quotegrab grab (.+)/ do |m, user|
+        grabbed = Message.where(:author => user).last
+        (m.reply "#{m.user.nick}: No messages for #{user}" and return) unless grabbed
+        Quote.create! do |g|
+          g.grabber_nick = m.user.nick
+          g.grabbed_nick = user
+          g.message_id   = grabbed.id
+        end
+        m.reply "#{m.user.nick}: Forcegrab!!!."
+      end
+      
+      on :message, /quotegrab list (.+)?/ do |m, user|
+        mygrabs = Quote.where(:grabber_nick => m.user.nick).all
+        (m.reply "#{m.user.nick}: You have no quotes." and return) unless mygrabs.any?
+        mygrabs = mygrabs.select{|g| g.grabbed_nick == user} if user
+        (m.reply "#{m.user.nick}: You have no quotes for #{user}." and return) unless mygrabs.any?
+        mygrabs.each_with_index do|g, idx|
+          m.reply "#{m.user.nick}: [#{idx}] #{g.message.body}"
+        end
+      end
+      
+      on :message, /quotegrab fetch (.+) (.+)/ do |m, user, idx|
+        theirgrabs = Quote.where(["grabbed_nick = ?", user]).all
+        (m.reply "#{m.user.nick}: No quotes found for #{user}." and return) unless theirgrabs.any?
+        fetched    = nil
+        if idx =~ /random/i
+          srand
+          fetched = theirgrabs[rand((theirgrabs.length) -1)]
+        elsif idx =~ /\d+/
+          fetched = theirgrabs[idx.to_i]
+        else
+          (m.reply "#{m.user.nick}: Can't find a quote that that index.")
+        end
+        m.reply "#{m.user.nick} #{fetched.message.body}"
+      end
+      
+      on :message, /quotegrab delete (\d+) (.+)?/ do |m, idx, user|
+        mygrabs = Quote.where(:grabber_nick => m.user.nick).all
+        mygrabs = mygrabs.select{|g| g.grabbed_nick == user} if user
+        (m.reply "#{m.user.nick}: Quote was deleted.") if mygrabs[idx].destroy!
       end
       
     end
