@@ -3,6 +3,7 @@
   margin: 4px;
   padding: 2px;
   padding-left: 3px;
+  cursor: pointer;
 }
 
 .search_term {
