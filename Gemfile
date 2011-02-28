@@ -31,5 +31,5 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # end
 
 gem 'daemons'
-gem 'god'
+gem 'god', :require => false
 gem 'cinch'
